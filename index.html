@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <title>Adera Group</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="header-footer.css">
+  
+</head>
+<body>
+  <!--=============== HEADER ===============-->
+  <header class="header">
+         <nav class="nav contaner">
+            <div class="nav__data">
+               <a href="#top" class="nav__logo">
+                  <img src="img/aderalogo.png" alt="Adera Group">
+               </a>
+               
+               <div class="nav__toggle" id="nav-toggle">
+                  <i class="ri-menu-line nav__burger"></i>
+                  <i class="ri-close-line nav__close"></i>
+               </div>
+            </div>
+
+            <!--=============== NAV MENU ===============-->
+            <div class="nav__menu" id="nav-menu">
+               <ul class="nav__list">
+                  <li><a href="#home" class="nav__link" data-i18n="nav.home">Главная</a></li>
+                  <li><a href="#about" class="nav__link" data-i18n="nav.about">О Нас</a></li>
+                  <li><a href="#service" class="nav__link" data-i18n="nav.services">Услуги</a></li>
+                  <li><a href="#app" class="nav__link" data-i18n="nav.catalog">Каталог</a></li>
+                  <li><a href="#contact" class="nav__link" data-i18n="nav.contact">Контакт</a></li>
+               </ul>
+            </div>
+
+            
+            <div class="nav__lang-switch">
+               <div class="lang-dropdown">
+                  <button class="lang-toggle" id="lang-toggle">RU ▾</button>
+                  <ul class="lang-menu">
+                     <li class="active" data-lang="RU">Рус</li>
+                     <li data-lang="KZ">Қаз</li>
+                  </ul>
+               </div>
+            </div>
+            <div class="nav__auth">
+               <a href="login.html" id="signInBtn" class="nav__link">Войти</a>
+               <a href="register.html" id="signUpBtn" class="nav__link">Регистрация</a>
+
+               <div id="userBox" class="user-box">
+                  <span id="userName"></span>
+                  <button class="logout-btn" onclick="logout()">
+                     <i class="ri-logout-box-r-line"></i>
+                     Выйти
+                  </button>
+               </div>
+            </div>
+         </nav>
+   </header>
+
+  <section class="homepage" id="home">
+         <div class="content flex">
+             <div class="text">
+                 <h1 data-i18n="home.title">Adera Group</h1>
+                 <p data-i18n="home.line1">предоставляет профессиональные услуги.</p>
+                 <p data-i18n="home.line2">Мы работаем, чтобы вы могли сосредоточиться на главном.</p>
+             </div>
+             <a href="#service" data-i18n="home.button">Услуги</a>
+         </div>
+   </section>
+
+  <section class="container2">
+         <div id="about" class="content1">
+            <h2>
+               <span data-i18n="about.prefix">О компании</span>
+               <span class="purple">Adera Group</span>
+            </h2>
+            <p data-i18n="about.line1">
+               <span class="company">Adera Group</span> – команда профессионалов с опытом в строительстве коммерческих зданий и сооружений и всех видов инженерных систем. Мы реализуем проекты любой сложности, обеспечивая качество, безопасность и современные решения.
+            </p>
+            <p data-i18n="about.line2">
+               <strong>Широкий спектр услуг</strong> – Наши специалисты разрабатывают и внедряют системы водоснабжения, отопления и кондиционирования воздуха, а также предлагают полный комплекс работ под ключ.
+            </p>
+            <p data-i18n="about.line3">
+               <strong>Индивидуальный подход</strong> – Мы внимательно учитываем требования каждого клиента и подбираем оптимальные решения для каждого объекта.
+            </p>
+        </div>
+   </section>
+   
+  <section class="catalog" id="service">
+      <h1>Наши Услуги</h1>
+     <div class="slide-container swiper">
+        <div class="slide-content">
+           <div class="kart-wrapper swiper-wrapper">
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Системы отопления.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Системы отопления</h2>
+                    <p class="descr">Обеспечиваем проектирование, монтаж и обслуживание современных систем отопления для жилых и промышленных объектов.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/водоснабжение.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Водоснабжение</h2>
+                    <p class="descr">Предлагаем комплексные решения по установке и обслуживанию систем водоснабжения. Обеспечиваем бесперебойную подачу воды и соответствие санитарным нормам.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Канализация.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Канализация</h2>
+                    <p class="descr">Проектируем и монтируем системы внутренней и наружной канализации. Обеспечиваем надёжный отвод сточных вод с соблюдением технических норм.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Вентиляция.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Вентиляция</h2>
+                    <p class="descr">Разрабатываем и устанавливаем системы вентиляции для создания комфортного и безопасного микроклимата в помещениях.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Электромонтажные работы.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Электромонтажные работы</h2>
+                    <p class="descr">Выполняем электромонтажные работы любой сложности: от прокладки кабеля до установки оборудования.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Слаботочные системы.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Слаботочные системы</h2>
+                    <p class="descr">Проектируем и внедряем слаботочные системы: видеонаблюдение, пожарную сигнализацию, СКУД, домофонию и СКС. Повышаем безопасность и технологичность объектов.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Изготовление и продажа насосных станций.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Изготовление и продажа насосных станций</h2>
+                    <p class="descr">Проектируем, изготавливаем и поставляем надёжные насосные станции для водоснабжения и технических нужд. Гарантируем качество и индивидуальный подход.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Монтаж металлоконструкций.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Монтаж металлоконструкций</h2>
+                    <p class="descr">Осуществляем монтаж металлоконструкций различной сложности для промышленных и гражданских объектов. Обеспечиваем прочность и точность установки.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+              <div class="kart swiper-slide">
+                 <div class="image-content">
+                    <span class="overlay"></span>
+  
+                    <div class="kart-image">
+                       <img src="img/Монолитные и внутренние строительные работы.png" alt="" class="kart-img">
+                    </div>
+                 </div>
+
+                 <div class="kart-content">
+                    <h2 class="name">Монолитные и внутренние строительные работы</h2>
+                    <p class="descr">Выполняем монолитные и внутренние строительные работы на всех этапах: от заливки фундамента до отделки помещений. Соблюдаем сроки и стандарты качества.</p>
+
+                    <button class="knopka">Связаться</button>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <div class="swiper-button-next swiper-navBtn"></div>
+        <div class="swiper-button-prev swiper-navBtn"></div>
+        <div class="swiper-pagination"></div>
+     </div>  
+  </section>
+
+  <nav class="crumbs" id="breadcrumbs"></nav>
+  <main id="app" class="container"></main>
+
+  <section class="catalog" id="contact">
+         <h1>Контакт</h1>
+         <div class="contact-wrapper">
+      <div class="conteiner">
+      <div class="left">
+         <h3 class="heading">Напишите Нам!</h3>
+         <p class="text">Мы здесь для вас! Чем мы можем помочь?</p>
+         <form id="contactForm" action="send.php" method="POST" novalidate>
+            <div class="inputBox">
+               <input 
+                  type="text"
+                  name="name"
+                  class="name"
+                  placeholder="Введите свое имя"
+               />
+            </div>
+            <div class="inputBox">
+               <input 
+                  type="text"
+                  name="email"
+                  class="email"
+                  placeholder="Введите свой адрес электронной почты"
+               />
+            </div>
+            <div class="inputBox">
+               <input 
+                  type="tel"
+                  name="phone"
+                  class="input"
+                  placeholder="Введите свой номер телефона"
+               />
+            </div>
+            <div class="inputBox">
+               <textarea 
+                  name="message"
+                  class="message"
+                  placeholder="Напишите сообщение..."
+               ></textarea>
+            </div>
+            <input type="text" name="company" style="display:none">
+            <button class="bttn">Отправить</button>
+            <div id="form-status" class="subtle" style="margin-top:10px;"></div>
+         </form>
+      </div>
+      <div class="right">
+         <div class="illustration">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.2174501950976!2d51.16218549999999!3d43.6852425!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41b4316a0b7bc8c7%3A0xe5d45ea1fbdec770!2sADERA%20GROUP!5e0!3m2!1sru!2skz!4v1754332021079!5m2!1sru!2skz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+         </div>
+         <div class="contact-info">
+            <div class="infoBox">
+               <div class="icon">
+                  <ion-icon name="location"></ion-icon>
+               </div>
+               <div class="text">
+                  <p>31Б микрорайон, 4 дом, Актау</p>
+               </div>
+            </div>
+            <div class="infoBox">
+               <div class="icon">
+                  <ion-icon name="call"></ion-icon>
+               </div>
+               <div class="text">
+                  <a href="tel:8 (707) 788 8587">8 (707) 788 8587</a>
+               </div>
+            </div>
+            <div class="infoBox">
+               <div class="icon">
+                  <ion-icon name="mail"></ion-icon>
+               </div>
+               <div class="text">
+                  <a href="info@adera.kz">info@adera.kz</a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="social-icons">
+         <a href="#">
+            <ion-icon name="logo-instagram"></ion-icon>
+         </a>
+         <a href="#">
+            <ion-icon name="logo-facebook"></ion-icon>
+         </a>
+         <a href="#">
+            <ion-icon name="logo-whatsapp"></ion-icon>
+         </a>
+      </div>
+   </div>
+         </div>         
+   </section>
+
+  <footer>
+         <div class="container1">
+            <div class="wrapper">
+               <div class="footer-widget">
+                  <a href="#">
+                     <img src="img/aderalogo.png" alt="logo">
+                  </a>
+                  <p class="desc">
+                     <strong>Adera Group</strong> – команда профессионалов с опытом в строительстве коммерческих зданий и сооружений и всех видов инженерных систем.
+                  </p>
+                  <ul class="socials">
+                     <li>
+                        <a href="#">
+                           <i class="ri-whatsapp-line"></i>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="#">
+                           <i class="ri-instagram-line"></i>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="#">
+                           <i class="ri-telegram-line"></i>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="footer-widget">
+                  <h6>Ссылки</h6>
+                  <ul class="links">
+                     <li><a href="#home">Главная</a></li>
+                     <li><a href="#about">О Нас</a></li>
+                     <li><a href="#service">Услуги</a></li>
+                     <li><a href="#app">Каталог</a></li>
+                     <li><a href="#contact">Контакт</a></li>
+                  </ul>
+               </div>
+
+               <div class="footer-widget">
+                  <h6>Контакт</h6>
+                  <ul class="links">
+                     <li>
+                        <a href="#">
+                           <i class="ri-map-pin-line"></i>
+                           <span>31Б микрорайон, 4 дом, Актау</span>
+                        </a>
+                    </li>
+                     <li>
+                        <a href="8 (707) 788 8587">
+                           <i class="ri-phone-fill"></i>
+                           <span>8 (707) 788 8587</span>
+                        </a>
+                     </li>
+                     <li>
+                        <a href="#">
+                           <i class="ri-mail-line"></i>
+                           <span>info@adera.kz</span>
+                        </a>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="copyright-wrapper">
+               <p>
+                  © 2025 Adera Group. Все права защищены.
+               </p>
+            </div>
+         </div>
+   </footer>
+
+   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+   <script src="app.js" defer></script>
+   <script src="main.js"></script>
+   <script src="lang.js"></script>
+   <script src="auth.js"></script>
+   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+   <script>
+      const signInBtn = document.getElementById('signInBtn');
+      const signUpBtn = document.getElementById('signUpBtn');
+      const userBox = document.getElementById('userBox');
+      const userName = document.getElementById('userName');
+
+      const isAuth = localStorage.getItem('auth');
+      const user = JSON.parse(localStorage.getItem('user'));
+
+      if (isAuth === 'true' && user) {
+         signInBtn.style.display = 'none';
+         signUpBtn.style.display = 'none';
+         userBox.style.display = 'flex';
+         userName.textContent = user.name;
+      } else {
+         userBox.style.display = 'none';
+      }
+   </script>
+</body>
+</html>

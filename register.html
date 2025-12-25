@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация — Adera Group</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Иконки -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f4f6ff, #eef0ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .register-card {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,.1);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 14px;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+      transition: border .2s;
+    }
+
+    .input-group input:focus {
+      outline: none;
+      border-color: #4b3cff;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: #4b3cff;
+      border: none;
+      color: #fff;
+      font-size: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background .2s;
+    }
+
+    .btn:hover {
+      background: #3a2fdc;
+    }
+
+    .footer-text {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+    }
+
+    .footer-text a {
+      color: #4b3cff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      font-size: 13px;
+      color: #777;
+      text-decoration: none;
+    }
+
+    .password-group {
+        position: relative;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 14px;
+        top: 36px;
+        font-size: 18px;
+        color: #777;
+        cursor: pointer;
+         user-select: none;    
+    }
+
+    .toggle-password:hover {
+        color: #4b3cff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="register-card">
+    <div class="logo">
+      <img src="img/aderalogo.png" alt="Adera Group">
+    </div>
+
+    <h2>Регистрация</h2>
+    <div class="subtitle">
+      Создайте аккаунт в Adera Group
+    </div>
+
+    <div class="input-group">
+      <label>Имя</label>
+      <input type="text" id="name" placeholder="Введите имя">
+    </div>
+
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="example@mail.com">
+    </div>
+
+    <div class="input-group password-group">
+        <label>Пароль</label>
+
+        <input type="password" id="password" placeholder="••••••••">
+
+        <i class="ri-eye-off-line toggle-password" onclick="togglePassword()"></i>
+    </div>
+
+    <button class="btn" onclick="register()">Зарегистрироваться</button>
+
+    <div class="footer-text">
+      Уже есть аккаунт?
+      <a href="login.html">Войти</a>
+    </div>
+
+    <a href="index.html" class="back-home">← Вернуться на главную</a>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const icon = document.querySelector('.toggle-password');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            icon.classList.remove('ri-eye-off-line');
+            icon.classList.add('ri-eye-line');
+        } else {
+            passwordInput.type = 'password';
+            icon.classList.remove('ri-eye-line');
+            icon.classList.add('ri-eye-off-line');
+        }
+    }
+  </script>
+</body>
+</html>
