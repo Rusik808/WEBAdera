@@ -432,10 +432,32 @@
          signInBtn.style.display = 'none';
          signUpBtn.style.display = 'none';
          userBox.style.display = 'flex';
+         
+         // Пишем имя
          userName.textContent = user.name;
-      } else {
-         userBox.style.display = 'none';
-      }
+
+         // ЛОГИКА ССЫЛКИ В ХЕДЕРЕ:
+         if (user.role === 'admin') {
+        // Админ -> Админ панель
+            userName.parentElement.onclick = () => window.location.href = 'admin.html';
+            userName.title = 'Админ-панель';
+         } else {
+         // Юзер -> Личный кабинет (Profile)
+            userName.parentElement.onclick = () => window.location.href = 'profile.html';
+            userName.title = 'Личный кабинет';
+            userName.style.cursor = 'pointer';
+         }
+     
+   } else {
+     userBox.style.display = 'none';
+  }
+  
+  // Обновляем функцию logout, чтобы она не конфликтовала
+  window.logout = function() {
+    localStorage.removeItem('auth');
+    localStorage.removeItem('user'); // Опционально: можно стирать данные юзера
+    window.location.href = 'index.html';
+  }
    </script>
 </body>
 </html>
