@@ -648,6 +648,10 @@ function renderProductDetail({id}){
   const specs = p.specs || {};
   const isArray = Array.isArray(specs);
 
+  // 1. ПРОВЕРКА: Есть ли товар уже в избранном?
+  const favs = JSON.parse(localStorage.getItem('favorites')) || [];
+  const isFav = favs.includes(String(p.id));
+
   // Формируем HTML спецификаций:
   const specsHTML = isArray
   ? specs.map((v, i) => {
@@ -672,8 +676,6 @@ function renderProductDetail({id}){
       `<div class="kv-line"><span class="subtle">${k}</span><strong>${v}</strong></div>`
     ).join("");
 
-
-
   app.innerHTML = `
     <a class="back" href="javascript:history.back()"><i></i>Назад</a>
     <div class="detail">
@@ -684,19 +686,23 @@ function renderProductDetail({id}){
         <div class="kv">${specsHTML}</div>
         <div class="btns">
           <button class="btn primary" data-scroll="contact">Связаться</button>
-          <button class="btn" onclick="alert('Скоро будет!')">Добавить в сравнение</button>
+          
+          <button class="btn" id="favBtn" onclick="toggleFavorite('${p.id}')" style="${isFav ? 'background:#ffe6e6; color:#d63031; border-color:#d63031' : ''}">
+            ${isFav ? '<i class="ri-heart-fill"></i> В избранном' : '<i class="ri-heart-line"></i> В избранное'}
+          </button>
+
         </div>
       </div>
     </div>
   `;
 
   setTimeout(() => {
-  const detail = document.querySelector(".detail");
-  if (detail) {
-    const y = detail.getBoundingClientRect().top + window.pageYOffset - 80; 
-    window.scrollTo({ top: y, behavior: "smooth" });
-  }
-}, 0);
+    const detail = document.querySelector(".detail");
+    if (detail) {
+      const y = detail.getBoundingClientRect().top + window.pageYOffset - 80; 
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  }, 0);
 }
 
 
@@ -744,7 +750,34 @@ document.addEventListener('click', (e) => {
 
 
 
+// Функция добавления/удаления из избранного (вставьте в конец app.js)
+window.toggleFavorite = function(id) {
+  let favs = JSON.parse(localStorage.getItem('favorites')) || [];
+  const strId = String(id);
+  const btn = document.getElementById('favBtn');
 
+  if (favs.includes(strId)) {
+    // Удаляем
+    favs = favs.filter(i => i !== strId);
+    if(btn) {
+       btn.innerHTML = '<i class="ri-heart-line"></i> В избранное';
+       btn.style.background = ''; 
+       btn.style.color = '';
+       btn.style.borderColor = '';
+    }
+  } else {
+    // Добавляем
+    favs.push(strId);
+    if(btn) {
+       btn.innerHTML = '<i class="ri-heart-fill"></i> В избранном';
+       btn.style.background = '#ffe6e6';
+       btn.style.color = '#d63031';
+       btn.style.borderColor = '#d63031';
+    }
+  }
+  
+  localStorage.setItem('favorites', JSON.stringify(favs));
+};
 
 
 
