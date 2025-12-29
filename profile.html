@@ -1,7 +1,154 @@
-<script src="js/guard.js"></script>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Личный кабинет — Adera Group</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.2.0/fonts/remixicon.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> <style>
+    body { background: #f4f6ff; padding-top: 20px; }
+    .profile-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    
+    /* Карточка профиля */
+    .profile-header {
+      background: #fff;
+      padding: 30px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+    }
+    .avatar-placeholder {
+      width: 80px; height: 80px;
+      background: #4b3cff;
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; font-weight: bold;
+    }
+    .user-info h2 { margin: 0 0 5px; color: #333; }
+    .user-info p { margin: 0; color: #777; }
 
-<h2>Личный кабинет</h2>
-<p>Вы успешно вошли</p>
-<button onclick="logout()">Выйти</button>
+    /* Секция Избранное */
+    .section-title { font-size: 24px; margin-bottom: 20px; color: #333; font-weight: 600; }
+    .favorites-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    
+    /* Переопределение стилей карточки для профиля */
+    .fav-card {
+      background: #fff; border-radius: 12px; overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      position: relative; transition: transform 0.2s;
+    }
+    .fav-card:hover { transform: translateY(-5px); }
+    .fav-img { height: 180px; background-size: contain; background-position: center; background-repeat: no-repeat; margin: 10px; }
+    .fav-body { padding: 15px; }
+    .fav-title { font-size: 14px; font-weight: 600; margin-bottom: 10px; height: 40px; overflow: hidden; }
+    .btn-remove {
+      width: 100%; padding: 8px; background: #ffe6e6; color: #d63031; border: none; border-radius: 6px; cursor: pointer; font-size: 13px;
+    }
+    .btn-remove:hover { background: #ffcccc; }
+    .back-home { display: inline-block; margin-bottom: 20px; color: #4b3cff; text-decoration: none; font-weight: 500; }
+  </style>
+</head>
+<body>
 
-<script src="js/auth.js"></script>
+  <div class="profile-container">
+    <a href="index.html" class="back-home">← Вернуться на главную</a>
+
+    <div class="profile-header">
+      <div class="avatar-placeholder" id="userInitials">U</div>
+      <div class="user-info">
+        <h2 id="profileName">Загрузка...</h2>
+        <p id="profileEmail">user@example.com</p>
+      </div>
+      <button onclick="logout()" class="btn" style="margin-left: auto; background: #eee; color: #333; width: auto;">Выйти</button>
+    </div>
+
+    <div>
+      <div class="section-title"><i class="ri-heart-fill" style="color:#ff4757"></i> Избранное</div>
+      <div id="favoritesList" class="favorites-grid">
+        <p style="color:#888">Список избранного пуст</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    // 1. Проверка авторизации
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) window.location.href = 'login.html';
+
+    // 2. Заполнение данных
+    document.getElementById('profileName').textContent = user.name;
+    document.getElementById('profileEmail').textContent = user.email;
+    document.getElementById('userInitials').textContent = user.name.charAt(0).toUpperCase();
+
+    // 3. Логика Избранного
+    async function loadFavorites() {
+      // Берем ID избранных товаров из localStorage
+      const favIds = JSON.parse(localStorage.getItem('favorites')) || [];
+      const container = document.getElementById('favoritesList');
+
+      if (favIds.length === 0) {
+        container.innerHTML = '<p>Вы пока ничего не добавили в избранное.</p>';
+        return;
+      }
+
+      container.innerHTML = 'Загрузка...';
+
+      // Нам нужны данные о товарах. Можно подключить app.js, но проще подтянуть данные напрямую
+      // Используем ту же логику Google Sheets, что и в app.js
+      const SHEET_ID = '1zmVH_kfenPsV8xlCgC9Exoq0MNIon1tl6qb0SBK3c44'; 
+      const GID = '0'; // ID листа товаров
+
+      try {
+        const res = await fetch(`https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`);
+        const txt = await res.text();
+        const json = JSON.parse(txt.replace(/^[^\n]*\n?/, '').replace(/google\.visualization\.Query\.setResponse\(|\);$/g, ''));
+        const cols = json.table.cols.map(c => c.label);
+        
+        // Преобразуем в массив объектов
+        const allProducts = json.table.rows.map(r => {
+            const obj = {};
+            r.c.forEach((cell, i) => { obj[cols[i]] = cell ? (cell.f || cell.v) : null; });
+            return obj;
+        });
+
+        // Фильтруем только те, что в избранном
+        const myFavs = allProducts.filter(p => favIds.includes(String(p.id)));
+
+        // Рендерим
+        container.innerHTML = myFavs.map(p => `
+          <div class="fav-card">
+            <div class="fav-img" style="background-image: url('${p.image || 'img/no-photo.png'}')"></div>
+            <div class="fav-body">
+              <div class="fav-title">${p.title}</div>
+              <a href="index.html#/product/${p.id}" style="font-size:12px; color:#4b3cff; display:block; margin-bottom:10px;">Подробнее</a>
+              <button class="btn-remove" onclick="removeFav('${p.id}')">Удалить</button>
+            </div>
+          </div>
+        `).join('');
+
+      } catch (e) {
+        console.error(e);
+        container.innerHTML = 'Ошибка загрузки данных';
+      }
+    }
+
+    function removeFav(id) {
+      let favs = JSON.parse(localStorage.getItem('favorites')) || [];
+      favs = favs.filter(fId => fId !== String(id));
+      localStorage.setItem('favorites', JSON.stringify(favs));
+      loadFavorites(); // Перезагрузить список
+    }
+
+    loadFavorites();
+  </script>
+</body>
+</html>
